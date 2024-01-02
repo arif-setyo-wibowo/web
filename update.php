@@ -1,5 +1,6 @@
 <?php
 require "koneksi.php";
+session_start();
 
 // Periksa apakah ID diberikan melalui parameter GET
 $id = isset($_GET['id']) ? $_GET['id'] : null;
@@ -65,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="./filecss/addproduk.css">
     <link rel="stylesheet" href="./fontawesome-free-6.5.1-web/css/all.css">
 </head>
+
 <body>
     <nav class="nav">
         <!-- Isi konten navigasi Anda di sini -->
@@ -122,4 +125,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
     </script>
 </body>
+
 </html>

@@ -1,5 +1,9 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,16 +19,21 @@
         <ul>
             <li><a href="./index.php">Home</a></li>
             <li><a href="./produk.php">Produk</a></li>
-            <li><a href="./contact.php">Contact</a></li>  
-            <li><a href="./cart.php">Keranjang</a></li>  
-            <li><a href="./registrasi.php"><button>Login</button></a></li>
+            <li><a href="./contact.php">Contact</a></li>
+
+            <?php if (empty($_SESSION['nama'])) : ?>
+                <li><a href="./registrasi.php"><button>Login</button></a></li>
+            <?php else : ?>
+                <li><a href="./cart.php">Keranjang</a></li>
+                <li><a href="./logout.php"><button>Logout</button></a></li>
+            <?php endif; ?>
         </ul>
-       <div class="menu-toggle">
+        <div class="menu-toggle">
             <input type="checkbox">
             <span></span>
             <span></span>
             <span></span>
-       </div>
+        </div>
     </nav>
 
     <!-- <video src="https://youtu.be/bGmeyJ3IQNw?si=oa2nE791vYa7p67n"></video> -->
@@ -41,20 +50,22 @@
         </div>
 
         <div class="produk"></div>
-            <div class="danke">
-                <img src="./foto/danke.jpg" alt="">
-                <p>
-                    Dangke merupakan sebuah insektisida yang bekerja secara kontak dan sistemik yang berbentuk tepung berwarna putih yang disuspensikan untuk mengendalikan bermacam macam hama pada tanaman seperti bawang merah, kedelai, cabai, kacang panjang, kakao, tomat, kacang hijau, kubis dan kelapa sawit.
-                </p>
-            </div>
+        <div class="danke">
+            <img src="./foto/danke.jpg" alt="">
+            <p>
+                Dangke merupakan sebuah insektisida yang bekerja secara kontak dan sistemik yang berbentuk tepung berwarna putih yang disuspensikan untuk mengendalikan bermacam macam hama pada tanaman seperti bawang merah, kedelai, cabai, kacang panjang, kakao, tomat, kacang hijau, kubis dan kelapa sawit.
+            </p>
+        </div>
 
-            <div class="corona">
-                <img src="./foto/corona.jpg" alt="" width="300px">
-                <p>
-                    Corona berfungsi untuk mengendalikan penyakit pada tanaman bawang merah, mangga, jagung, cabai dan padi yang menumpas cendawan atau jamur yang biasa tumbuh di daun, akar, batang.
-                </p>
-                <div class="lihat">
-                    <a href="./produk.php"><h3>Lihat Bebih Banyak -></h3></a>
+        <div class="corona">
+            <img src="./foto/corona.jpg" alt="" width="300px">
+            <p>
+                Corona berfungsi untuk mengendalikan penyakit pada tanaman bawang merah, mangga, jagung, cabai dan padi yang menumpas cendawan atau jamur yang biasa tumbuh di daun, akar, batang.
+            </p>
+            <div class="lihat">
+                <a href="./produk.php">
+                    <h3>Lihat Bebih Banyak -></h3>
+                </a>
             </div>
         </div>
     </div>
@@ -66,7 +77,8 @@
             nav.classList.toggle('slide');
         });
     </script>
-   
+
 
 </body>
+
 </html>

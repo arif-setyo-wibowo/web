@@ -1,95 +1,109 @@
 <?php
 require "koneksi.php";
-function connectDB() {
+session_start();
+
+function connectDB()
+{
     $server = "localhost";
     $username = "root";
     $password = "";
     $database = "presentasikarya";
     $conn = new mysqli($server, $username, $password, $database);
 
-    // Periksa koneksi
     if ($conn->connect_error) {
         die("Koneksi gagal: " . $conn->connect_error);
     }
     return $conn;
 }
 
-// Proses registrasi dan login
+function redirect($url)
+{
+    header("Location: $url");
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = connectDB();
 
     if (isset($_POST['login'])) {
-        // Proses login
         $nama = $_POST['nama'];
         $password = $_POST['password'];
 
+        if (!empty($nama) && !empty($password)) {
+            $sql = "SELECT * FROM daftar WHERE nama = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $nama);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-
-        if (isset($_POST["nama"]) && isset($_POST["password"])) {
-            $sql = "SELECT * FROM daftar WHERE nama = '$nama'";
-            $result = mysqli_query($conn, $sql);
-            $hasil = $result->fetch_assoc();
-          
-            if (mysqli_num_rows($result) == 1) {
-              if (password_verify($password, $hasil['password'])) {
-                echo  "Login berhasil";
-                header("Location: index.php");
-              } else {
-                echo  "Password Salah !";
-              }
+            if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                if (password_verify($password, $row['password'])) {
+                    session_start();
+                    $_SESSION['nama'] = "bowo";
+                    $_SESSION['email'] = $row['email'];
+                    redirect("index.php");
+                } else {
+                    echo  "Password Salah !";
+                }
             } else {
-              echo "Nama Tidak Ditemukan !";
+                echo "Nama Tidak Ditemukan !";
             }
-          }
+        }
     } elseif (isset($_POST['daftar'])) {
-        // Proses pendaftaran
         $nama = $_POST['nama'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    
-        $stmt = $conn->prepare("INSERT INTO daftar (nama, email, password) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nama, $email, $password);
+        $sql = "INSERT INTO daftar (nama, email, password) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $nama, $email, $hashedPassword);
 
-    
         if ($stmt->execute()) {
-            echo "Pendaftaran berhasil";
-            header("Location: index.php");
+            echo "Pendaftaran berhasil. Silakan login.";
+            redirect("registrasi.php");
         } else {
-            echo "Error: " . $stmt->error;
+            echo "Error saat melakukan pendaftaran: " . $stmt->error;
         }
-    
+
         $stmt->close();
     }
-    
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrasi dan Login</title>
     <link rel="stylesheet" href="./filecss/login.css">
 </head>
+
 <body>
     <nav class="nav">
         <h1>Petani Milenial</h1>
         <ul>
             <li><a href="./index.php">Home</a></li>
             <li><a href="./produk.php">Produk</a></li>
-            <li><a href="./contact.php">Contact</a></li>  
-            <li><a href="./registrasi.php"><button>Login</button></a></li>
+            <li><a href="./contact.php">Contact</a></li>
+            <?php if (empty($_SESSION['nama'])) : ?>
+                <li><a href="./registrasi.php"><button>Login</button></a></li>
+            <?php else : ?>
+                <li><a href="./cart.php">Keranjang</a></li>
+                <li><a href="./logout.php"><button>Logout</button></a></li>
+            <?php endif; ?>
         </ul>
-       <div class="menu-toggle">
+        <div class="menu-toggle">
             <input type="checkbox">
             <span></span>
             <span></span>
             <span></span>
-       </div>
+        </div>
     </nav>
 
     <div class="container">
@@ -145,4 +159,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
     </script>
 </body>
+
 </html>
