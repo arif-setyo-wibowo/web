@@ -1,0 +1,63 @@
+@import url(navbar.css);
+.judul {
+    background-image: url(../foto/foto4petani.jpg);
+    background-size: cover;
+    min-height: 400px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.judul h1 {
+    padding: 50px;
+}
+
+.produk {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 70px;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+.produk1 {
+    width: 300px;
+    margin: 30px;
+    border-radius: 5px;
+    text-align: justify;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 20px;
+}
+
+.produk1 img {
+    width: 250px;
+}
+
+.produk1 a {
+    text-decoration: none;
+}
+
+.produk1 .isi {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.produk1 a i {
+    color: #498103;
+    width: 30px;
+    height: 27px;
+    border: 2px solid #498103;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.produk1 .shopee {
+    display: flex;
+    justify-content: space-around;
+    background-color: #498103;
+    width: 230px;
+    height: 30px;
+    border-radius: 5px;
+    color: #ffffff;
+}

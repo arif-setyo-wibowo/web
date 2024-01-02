@@ -1,0 +1,134 @@
+@import url(navbar.css);
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.contact {
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contact .content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.contact .content h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.contactForm {
+    width: 40%;
+    padding: 40px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.contactForm h2 {
+    font-size: 30px;
+    color: #000000;
+    font-weight: 500px;
+}
+
+.contactForm .inputBox {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.contactForm .inputBox input,
+.contactForm .inputBox textarea {
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #010101;
+    outline: none;
+    resize: none;
+}
+
+.contactForm .inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.contactForm .inputBox input:focus~span,
+.contactForm .inputBox input:valid~span,
+.contactForm .inputBox textarea:focus~span,
+.contactForm .inputBox textarea:valid~span {
+    color: #778299;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+
+.contactForm .inputBox input [type="submit"] {
+    width: 100px;
+    background: #778299;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+
+small {
+    background-color: #498103;
+    display: block;
+    height: 40px;
+    text-align: center;
+    color: #ffffff;
+}
+
+@media (max-width:768px) {
+    .contact {
+        padding: 50px;
+    }
+    .container {
+        flex-direction: column;
+    }
+    .container .contactinfo {
+        margin-bottom: 40px;
+    }
+    .container .contactinfo {
+        width: 100%;
+    }
+}
+
+.inputbox a i {
+    color: #498103;
+    width: 30px;
+    height: 27px;
+    border: 2px solid #498103;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactForm .inputBox a {
+    margin-top: 15px;
+    text-decoration: none;
+    width: 30px;
+    display: inline-block;
+}

@@ -1,0 +1,35 @@
+@import url(./navbar.css);
+.judul {
+    margin: auto;
+    text-align: center;
+    margin: 20px;
+}
+
+table {
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    border-collapse: collapse;
+    /* menggabungkan garis tepi sel */
+}
+
+a {
+    text-decoration: none;
+}
+
+table thead tr th {
+    border: 1px solid #000;
+    /* garis tepi sel */
+}
+
+table tbody tr td {
+    border: 1px solid #000;
+    /* garis tepi sel */
+}
+
+th,
+td {
+    padding: 10px;
+    /* jarak antara konten dan tepi sel */
+}
